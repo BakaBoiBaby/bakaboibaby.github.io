@@ -28,7 +28,7 @@ function countdownStart(){
     }
     else{
     	document.getElementById("daysLeft").innerHTML = Math.floor(timeDifference/(1000*60*60*24));
-   		document.getElementById("hoursLeft").innerHTML = Math.floor((timeDifference % (1000*60*60*24)/(1000*60*24)));
+   		document.getElementById("hoursLeft").innerHTML = Math.floor((timeDifference % (1000*60*60*24)/(1000*60*24*2)-1));
     	document.getElementById("minLeft").innerHTML = Math.floor((timeDifference % (1000*60*60) / (1000*60)));
     	document.getElementById("secLeft").innerHTML = Math.floor((timeDifference % (1000*60) / 1000));
     }
