@@ -1,13 +1,14 @@
 var hour, min, sec, todaysDate;
-const destinationDate = new Date("March 20, 2020").getTime();
+//const destinationDate = new Date("March 20, 2020").getTime();
+const destinationDate = new Date("February 29, 2020").getTime();
 
-(function main(){ 
+(function main(){
     countdownStart();
 })();
 
 function countdownStart(){
-	
-	todaysDate = new Date();
+
+	  todaysDate = new Date();
     hour = todaysDate.getHours();
     hour = formatTime(hour);
     hour = formatTwoDigits(hour);
@@ -17,20 +18,23 @@ function countdownStart(){
     sec = formatTwoDigits(sec);
 
     let presentTime = todaysDate.getTime();
-    let timeDifference = destinationDate - presentTime;
+    let timeBefore = destinationDate - presentTime;
+    let timeAfter =  presentTime - destinationDate;
     setTimeout(countdownStart, 1000);
 
-    if(timeDifference < 0){
-    	document.getElementById("daysLeft").innerHTML = 0;
-   		document.getElementById("hoursLeft").innerHTML = 0;
-    	document.getElementById("minLeft").innerHTML = 0;
-    	document.getElementById("secLeft").innerHTML = 0;
+    if(timeBefore < 0){
+      document.getElementById("timetext").innerHTML = "Days has passed";
+    	document.getElementById("daysLeft").innerHTML = Math.floor(timeAfter/(1000*60*60*24));
+   		document.getElementById("hoursLeft").innerHTML = Math.floor(timeAfter % (1000*60*60*24)/(1000*60*60));
+    	document.getElementById("minLeft").innerHTML = Math.floor(timeAfter % (1000*60*60) / (1000*60));
+    	document.getElementById("secLeft").innerHTML = Math.floor(timeAfter % (1000*60) / 1000);
     }
     else{
-    	document.getElementById("daysLeft").innerHTML = Math.floor(timeDifference/(1000*60*60*24));
-   		document.getElementById("hoursLeft").innerHTML = Math.floor((timeDifference % (1000*60*60*24)/(1000*60*24*2)-1));
-    	document.getElementById("minLeft").innerHTML = Math.floor((timeDifference % (1000*60*60) / (1000*60)));
-    	document.getElementById("secLeft").innerHTML = Math.floor((timeDifference % (1000*60) / 1000));
+      document.getElementById("timetext").innerHTML = "Days before the day";
+    	document.getElementById("daysLeft").innerHTML = Math.floor(timeBefore/(1000*60*60*24));
+   		document.getElementById("hoursLeft").innerHTML = Math.floor(timeBefore % (1000*60*60*24)/(1000*60*24*2));
+    	document.getElementById("minLeft").innerHTML = Math.floor(timeBefore % (1000*60*60) / (1000*60));
+    	document.getElementById("secLeft").innerHTML = Math.floor(timeBefore % (1000*60) / 1000);
     }
 }
 
